@@ -1,0 +1,13 @@
+# Frontend saja: docker compose up -d --build
+# Aplikasi: http://localhost:3000
+# Backend harus berjalan terpisah (repo ifs24030-pabwe2026-p1-backend).
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        # URL API backend, dibakukan saat build
+        VITE_API_BASEURL: ${VITE_API_BASEURL:-http://localhost:8000/api}
+    ports:
+      - "3000:80"
+    restart: unless-stopped

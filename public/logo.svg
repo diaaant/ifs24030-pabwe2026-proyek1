@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BengkelKu">
+  <rect width="64" height="64" rx="14" fill="#0C2F3B"/>
+  <path d="M14 40a18 18 0 1 1 36 0" fill="none" stroke="#F5A800" stroke-width="5" stroke-linecap="round"/>
+  <path d="M32 40 41 25" stroke="#F4F6F5" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="32" cy="40" r="4.5" fill="#F4F6F5"/>
+  <path d="M16 50h32" stroke="#F4F6F5" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+</svg>

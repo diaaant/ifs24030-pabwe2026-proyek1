@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* Identitas visual: biru petrol bengkel + kuning sinyal, terinspirasi panel instrumen dan tiket servis. */
+@theme {
+  --font-sans: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-ink: #14212b;
+  --color-paper: #f3f5f4;
+  --color-line: #d9e0dd;
+
+  --color-petrol-50: #eaf3f5;
+  --color-petrol-100: #cfe4e9;
+  --color-petrol-200: #a3c9d2;
+  --color-petrol-500: #1f6b7e;
+  --color-petrol-700: #124a5a;
+  --color-petrol-800: #0f3d4c;
+  --color-petrol-900: #0c2f3b;
+  --color-petrol-950: #081f28;
+
+  --color-signal-300: #ffd566;
+  --color-signal-400: #ffc233;
+  --color-signal-500: #f5a800;
+  --color-signal-700: #8a5d00;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+
+  button,
+  a,
+  [role="button"],
+  select,
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal-500);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .display {
+    font-stretch: 112%;
+    font-weight: 750;
+    letter-spacing: -0.015em;
+  }
+
+  .card {
+    @apply rounded-xl border border-line bg-white;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-ink/40 focus:border-petrol-500 focus:outline-none focus:ring-2 focus:ring-petrol-500/25 disabled:bg-paper disabled:text-ink/50;
+  }
+
+  .input-error {
+    @apply border-red-600 focus:border-red-600 focus:ring-red-600/20;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger,
+  .btn-signal {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-petrol-900 text-white hover:bg-petrol-800;
+  }
+
+  .btn-secondary {
+    @apply border border-line bg-white text-ink hover:bg-petrol-50;
+  }
+
+  .btn-danger {
+    @apply bg-red-700 text-white hover:bg-red-800;
+  }
+
+  .btn-signal {
+    @apply bg-signal-400 text-petrol-950 hover:bg-signal-300;
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  /* Tepi bergerigi ala tiket servis */
+  .ticket-divider {
+    @apply border-t-2 border-dashed border-line;
+  }
+}
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+}
