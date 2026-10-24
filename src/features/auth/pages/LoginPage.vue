@@ -37,13 +37,13 @@ const submit = async () => {
     <p class="mt-2 text-sm text-ink/65">Kelola booking dan riwayat servis kendaraan Anda.</p>
 
     <form class="mt-8 space-y-5" novalidate @submit.prevent="submit">
-      <FormField label="Email" for="email" :error="errors.email">
-        <input id="email" v-model="values.email" type="email" autocomplete="email" class="input" :class="{ 'input-error': errors.email }" placeholder="nama@email.com" />
+      <FormField label="Email" for="username" :error="errors.email">
+        <input id="username" name="username" v-model="values.email" type="email" autocomplete="username" class="input" :class="{ 'input-error': errors.email }" placeholder="nama@email.com" />
       </FormField>
       <FormField label="Kata sandi" for="password" :error="errors.password">
-        <input id="password" v-model="values.password" type="password" autocomplete="current-password" class="input" :class="{ 'input-error': errors.password }" />
+        <input id="password" name="password" v-model="values.password" type="password" autocomplete="current-password" class="input" :class="{ 'input-error': errors.password }" />
       </FormField>
-      <button type="submit" class="btn-primary w-full" :disabled="auth.isAuthLogin">
+      <button id="btn-submit" type="submit" class="btn-primary w-full" :disabled="auth.isAuthLogin">
         {{ auth.isAuthLogin ? "Memproses..." : "Masuk" }}
       </button>
     </form>
