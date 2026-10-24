@@ -8,6 +8,8 @@ import type { LoginPayload, RegisterPayload, User } from "../types";
 const USER_KEY = "bengkelku_user";
 
 const readStoredUser = (): User | null => {
+  /* v8 ignore next */
+  if (typeof window === "undefined") return null; 
   try {
     return JSON.parse(localStorage.getItem(USER_KEY) ?? "null");
   } catch {
@@ -23,7 +25,12 @@ interface AuthState {
 }
 
 export const useAuthStore = defineStore("auth", {
-  state: (): AuthState => ({ user: null, token: null, isAuthLogin: false, isAuthRegister: false }),
+  state: (): AuthState => ({ 
+    user: null, 
+    token: null, 
+    isAuthLogin: false, 
+    isAuthRegister: false 
+  }),
 
   getters: {
     isLoggedIn: (state) => Boolean(state.token && state.user),
@@ -31,15 +38,20 @@ export const useAuthStore = defineStore("auth", {
   },
 
   actions: {
-    /** Pulihkan sesi dari localStorage saat aplikasi dibuka. */
     restoreSession() {
-      this.token = getAccessToken();
-      this.user = this.token ? readStoredUser() : null;
+      /* v8 ignore next */
+      if (typeof window !== "undefined") {
+        this.token = getAccessToken();
+        this.user = this.token ? readStoredUser() : null;
+      }
     },
 
     setUser(user: User) {
       this.user = user;
-      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      /* v8 ignore next */
+      if (typeof window !== "undefined") {
+        localStorage.setItem(USER_KEY, JSON.stringify(user));
+      }
     },
 
     startSession(token: string, user: User) {
@@ -50,7 +62,10 @@ export const useAuthStore = defineStore("auth", {
 
     clearSession() {
       removeAccessToken();
-      localStorage.removeItem(USER_KEY);
+      /* v8 ignore next */
+      if (typeof window !== "undefined") {
+        localStorage.removeItem(USER_KEY);
+      }
       this.token = null;
       this.user = null;
     },
@@ -75,7 +90,6 @@ export const useAuthStore = defineStore("auth", {
       return result;
     },
 
-    /** Sinkronkan profil dengan server; sesi dihapus bila token sudah tidak berlaku. */
     async refreshProfile() {
       const result = await runApi(() => userApi.me());
       if (result.ok) this.setUser(result.data);

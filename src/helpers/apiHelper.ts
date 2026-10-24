@@ -18,7 +18,10 @@ export interface ApiResponse<T> {
   errors?: FieldError[];
 }
 
-export type QueryParams = Record<string, string | number | boolean | null | undefined>;
+export type QueryParams = Record<
+  string,
+  string | number | boolean | null | undefined
+>;
 
 export interface RequestOptions {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -46,24 +49,42 @@ export class ApiError extends Error {
 
 const TOKEN_KEY = "bengkelku_token";
 
-export const getAccessToken = (): string | null => localStorage.getItem(TOKEN_KEY);
+export const getAccessToken = (): string | null => {
+  /* v8 ignore next */
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(TOKEN_KEY);
+};
 
-export const putAccessToken = (token: string): void => localStorage.setItem(TOKEN_KEY, token);
+export const putAccessToken = (token: string): void => {
+  /* v8 ignore next */
+  if (typeof window !== "undefined") {
+    localStorage.setItem(TOKEN_KEY, token);
+  }
+};
 
-export const removeAccessToken = (): void => localStorage.removeItem(TOKEN_KEY);
+export const removeAccessToken = (): void => {
+  /* v8 ignore next */
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+};
 
 /** Susun URL dengan query string; nilai kosong (null, undefined, "") dilewati. */
 export const buildUrl = (path: string, query: QueryParams = {}): string => {
   const params = new URLSearchParams();
   Object.entries(query).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== "") params.append(key, String(value));
+    if (value !== undefined && value !== null && value !== "")
+      params.append(key, String(value));
   });
   const queryString = params.toString();
   return `${BENGKELKU_API_URL}${path}${queryString ? `?${queryString}` : ""}`;
 };
 
 /** Pembungkus fetch ke REST API: menambahkan token Bearer dan menyeragamkan error. */
-export async function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<ApiResponse<T>> {
+export async function apiRequest<T>(
+  path: string,
+  options: RequestOptions = {},
+): Promise<ApiResponse<T>> {
   const { method = "GET", body, query, auth = true } = options;
 
   const headers: Record<string, string> = { Accept: "application/json" };
@@ -80,7 +101,10 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
       body: body === undefined ? undefined : JSON.stringify(body),
     });
   } catch {
-    throw new ApiError("Tidak dapat terhubung ke server. Periksa koneksi Anda.", 0);
+    throw new ApiError(
+      "Tidak dapat terhubung ke server. Periksa koneksi Anda.",
+      0,
+    );
   }
 
   const payload = await response.json().catch(() => null);
@@ -90,7 +114,7 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
     throw new ApiError(
       payload?.message ?? "Terjadi kesalahan pada server",
       response.status,
-      payload?.errors ?? []
+      payload?.errors ?? [],
     );
   }
 
@@ -98,13 +122,25 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
 }
 
 /** Jalankan request dan ubah ApiError menjadi hasil terstruktur agar store tidak perlu try/catch. */
-export async function runApi<T>(request: () => Promise<ApiResponse<T>>): Promise<ActionResult<T>> {
+export async function runApi<T>(
+  request: () => Promise<ApiResponse<T>>,
+): Promise<ActionResult<T>> {
   try {
     const response = await request();
-    return { ok: true, data: response.data, meta: response.meta, message: response.message };
+    return {
+      ok: true,
+      data: response.data,
+      meta: response.meta,
+      message: response.message,
+    };
   } catch (error) {
     if (error instanceof ApiError) {
-      return { ok: false, message: error.message, errors: error.errors, status: error.status };
+      return {
+        ok: false,
+        message: error.message,
+        errors: error.errors,
+        status: error.status,
+      };
     }
     throw error;
   }
