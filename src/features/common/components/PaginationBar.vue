@@ -8,7 +8,8 @@ defineEmits<{ change: [page: number] }>();
 
 <template>
   <nav v-if="meta.totalPages > 1" class="mt-4 flex items-center justify-between gap-3 text-sm" aria-label="Halaman">
-    <p class="text-ink/60">Halaman {{ meta.page }} dari {{ meta.totalPages }} ({{ meta.total }} data)</p>
+    <!-- PERBAIKAN: text-ink/60 diubah menjadi text-ink/80 -->
+    <p class="text-ink/80">Halaman {{ meta.page }} dari {{ meta.totalPages }} ({{ meta.total }} data)</p>
     <div class="flex gap-2">
       <button class="btn-secondary btn-sm" :disabled="meta.page <= 1" aria-label="Halaman sebelumnya" @click="$emit('change', meta.page - 1)">
         <ChevronLeft :size="16" />

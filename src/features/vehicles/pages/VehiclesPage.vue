@@ -73,7 +73,7 @@ const remove = async (vehicle: Vehicle) => {
 
   <div class="mb-5 flex flex-wrap gap-3">
     <div class="relative min-w-60 flex-1">
-      <Search :size="16" class="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-ink/40" />
+      <Search :size="16" class="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-ink/60" />
       <input v-model="filters.search" class="input pl-9" placeholder="Cari nomor polisi, merek, atau model" aria-label="Cari kendaraan" />
     </div>
     <select v-model="filters.vehicle_type" class="input w-auto" aria-label="Jenis kendaraan">
@@ -93,12 +93,14 @@ const remove = async (vehicle: Vehicle) => {
       <div class="flex items-start justify-between gap-2">
         <RouterLink :to="`/vehicles/${vehicle.id}`" class="min-w-0">
           <p class="display text-xl text-petrol-900">{{ vehicle.plate_number }}</p>
-          <p class="truncate text-sm text-ink/65">{{ vehicle.brand }} {{ vehicle.model }}, {{ vehicle.year }}</p>
+          <!-- PERBAIKAN: text-ink/65 diubah menjadi text-ink/80 -->
+          <p class="truncate text-sm text-ink/80">{{ vehicle.brand }} {{ vehicle.model }}, {{ vehicle.year }}</p>
         </RouterLink>
         <StatusBadge :label="vehicle.vehicle_type === 'motor' ? 'Motor' : 'Mobil'" tone="info" />
       </div>
       <OdometerDisplay :value="vehicle.odometer" compact />
-      <p v-if="auth.isAdmin" class="text-xs text-ink/55">Pemilik: {{ vehicle.owner_name }}</p>
+      <!-- PERBAIKAN: text-ink/55 diubah menjadi text-ink/80 -->
+      <p v-if="auth.isAdmin" class="text-xs text-ink/80">Pemilik: {{ vehicle.owner_name }}</p>
       <div class="mt-auto flex gap-2">
         <RouterLink :to="`/bookings/new?vehicle=${vehicle.id}`" class="btn-signal btn-sm flex-1">Booking servis</RouterLink>
         <button class="btn-secondary btn-sm" :aria-label="`Ubah ${vehicle.plate_number}`" @click="openForm(vehicle)"><Pencil :size="14" /></button>

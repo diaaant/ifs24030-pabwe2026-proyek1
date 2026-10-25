@@ -47,7 +47,7 @@ export default defineNuxtConfig({
           href: "https://fonts.gstatic.com",
           crossorigin: "",
         },
-        // PERBAIKAN: Google Fonts dimuat secara asinkron agar tidak memblokir render
+        // Google Fonts asinkron
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap",
