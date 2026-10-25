@@ -1,6 +1,11 @@
 {
   "buildCommand": "npx nuxt generate",
   "outputDirectory": ".output/public",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://ifs24030-pabwe2026-proyek1-be-fc83c.containers.snapdeploy.app/api/:path*"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
-  
