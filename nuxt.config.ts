@@ -8,11 +8,8 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
   telemetry: false,
-  // SPA mode: routing dan penyimpanan token dijalankan di sisi klien
   ssr: false,
-  // Kode aplikasi berada di src/
   srcDir: "src/",
-  // Rute dideklarasikan di src/routes.ts dan dipasang lewat src/router.options.ts
   pages: true,
   css: ["~/index.css"],
   modules: ["@pinia/nuxt"],
@@ -45,10 +42,17 @@ export default defineNuxtConfig({
       link: [
         { rel: "icon", type: "image/svg+xml", href: "/logo.svg" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "",
+        },
+        // PERBAIKAN: Google Fonts dimuat secara asinkron agar tidak memblokir render
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap",
+          media: "print",
+          onload: "this.media='all'",
         },
       ],
       bodyAttrs: {

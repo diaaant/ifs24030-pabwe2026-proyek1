@@ -33,8 +33,10 @@ const submit = async () => {
 
 <template>
   <section>
-    <h2 class="display text-3xl text-petrol-900">Masuk</h2>
-    <p class="mt-2 text-sm text-ink/65">Kelola booking dan riwayat servis kendaraan Anda.</p>
+    <!-- Perbaikan: Tag <h2> diubah menjadi <h1> agar lolos audit -->
+    <h1 class="display text-3xl text-petrol-900">Masuk</h1>
+    <!-- Perbaikan: text-ink/65 diubah menjadi text-ink/80 agar kontras warna cukup -->
+    <p class="mt-2 text-sm text-ink/80">Kelola booking dan riwayat servis kendaraan Anda.</p>
 
     <form class="mt-8 space-y-5" novalidate @submit.prevent="submit">
       <FormField label="Email" for="username" :error="errors.email">
@@ -48,13 +50,13 @@ const submit = async () => {
       </button>
     </form>
 
-    <p class="mt-6 text-center text-sm text-ink/65">
+    <p class="mt-6 text-center text-sm text-ink/80">
       Belum punya akun?
       <RouterLink to="/auth/register" class="font-semibold text-petrol-700 underline">Daftar sekarang</RouterLink>
     </p>
 
     <div class="mt-8 rounded-xl border border-dashed border-line p-4">
-      <p class="text-xs font-semibold text-ink/60">Akun demo (data contoh)</p>
+      <p class="text-xs font-semibold text-ink/80">Akun demo (data contoh)</p>
       <div class="mt-3 flex flex-wrap gap-2">
         <button v-for="account in DEMO_ACCOUNTS" :key="account.email" type="button" class="btn-secondary btn-sm" @click="setValues({ email: account.email, password: account.password })">
           {{ account.label }}

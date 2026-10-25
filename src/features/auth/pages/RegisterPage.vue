@@ -32,8 +32,9 @@ const submit = async () => {
 
 <template>
   <section>
-    <h2 class="display text-3xl text-petrol-900">Buat akun</h2>
-    <p class="mt-2 text-sm text-ink/65">Daftarkan kendaraan dan pesan jam servis dalam hitungan menit.</p>
+    <!-- Perbaikan: Tag <h2> diubah menjadi <h1> -->
+    <h1 class="display text-3xl text-petrol-900">Buat akun</h1>
+    <p class="mt-2 text-sm text-ink/80">Daftarkan kendaraan dan pesan jam servis dalam hitungan menit.</p>
 
     <form class="mt-8 space-y-4" novalidate @submit.prevent="submit">
       <FormField label="Nama lengkap" for="name" :error="errors.name">
@@ -56,7 +57,7 @@ const submit = async () => {
       </button>
     </form>
 
-    <p class="mt-6 text-center text-sm text-ink/65">
+    <p class="mt-6 text-center text-sm text-ink/80">
       Sudah punya akun?
       <RouterLink to="/auth/login" class="font-semibold text-petrol-700 underline">Masuk</RouterLink>
     </p>
