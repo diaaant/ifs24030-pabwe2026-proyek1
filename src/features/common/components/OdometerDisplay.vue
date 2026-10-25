@@ -19,6 +19,6 @@ const digits = computed(() => String(Math.max(0, Math.round(props.value))).padSt
         {{ digit }}
       </span>
     </div>
-    <span class="text-xs font-semibold text-ink/60">km</span>
+    <span class="text-xs font-semibold text-ink/80">km</span>
   </div>
 </template>

@@ -23,20 +23,20 @@ const statuses = computed(() => Object.entries(props.data.status_counts) as [Boo
   <div class="space-y-6">
     <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <div class="card p-5">
-        <p class="text-sm text-ink/60">Booking hari ini</p>
+        <p class="text-sm text-ink/80">Booking hari ini</p>
         <p class="display mt-2 text-3xl text-petrol-900">{{ data.totals.today_bookings }}</p>
       </div>
       <RouterLink to="/bookings" class="card border-signal-400 bg-signal-300/20 p-5">
-        <p class="text-sm text-ink/70">Menunggu konfirmasi</p>
+        <p class="text-sm text-ink/80">Menunggu konfirmasi</p>
         <p class="display mt-2 text-3xl text-petrol-900">{{ data.totals.pending_bookings }}</p>
       </RouterLink>
       <div class="card p-5">
-        <p class="text-sm text-ink/60">Pelanggan terdaftar</p>
+        <p class="text-sm text-ink/80">Pelanggan terdaftar</p>
         <p class="display mt-2 text-3xl text-petrol-900">{{ data.totals.customers }}</p>
-        <p class="mt-1 text-xs text-ink/55">{{ data.totals.vehicles }} kendaraan</p>
+        <p class="mt-1 text-xs text-ink/80">{{ data.totals.vehicles }} kendaraan</p>
       </div>
       <div class="card p-5">
-        <p class="text-sm text-ink/60">Total pendapatan servis</p>
+        <p class="text-sm text-ink/80">Total pendapatan servis</p>
         <p class="display mt-2 text-2xl text-petrol-900">{{ formatRupiah(data.totals.revenue) }}</p>
       </div>
     </section>
@@ -57,11 +57,11 @@ const statuses = computed(() => Object.entries(props.data.status_counts) as [Boo
         <h2 class="mb-4 text-base font-bold text-petrol-900">Layanan terpopuler</h2>
         <ul v-if="data.popular_services.length" class="space-y-3">
           <li v-for="service in data.popular_services" :key="service.id">
-            <div class="flex justify-between text-sm"><span class="font-semibold">{{ service.name }}</span><span class="text-ink/60">{{ service.total }} booking</span></div>
+            <div class="flex justify-between text-sm"><span class="font-semibold">{{ service.name }}</span><span class="text-ink/80">{{ service.total }} booking</span></div>
             <div class="mt-1 h-2 rounded-full bg-paper"><div class="h-2 rounded-full bg-petrol-700" :style="{ width: `${(service.total / maxPopular) * 100}%` }" /></div>
           </li>
         </ul>
-        <p v-else class="text-sm text-ink/60">Belum ada data booking.</p>
+        <p v-else class="text-sm text-ink/80">Belum ada data booking.</p>
       </div>
       <div class="card p-5">
         <h2 class="mb-4 text-base font-bold text-petrol-900">Status booking</h2>
